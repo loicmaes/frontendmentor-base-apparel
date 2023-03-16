@@ -87,25 +87,48 @@ body {
     &__newsletter {
       display: flex;
       $radius: 100rem;
+      position: relative;
       border-radius: $radius;
       background-image: colors.$grad-wr;
       border: 1px solid colors.$desat-red-shadow;
 
+      &.invalid {
+        border-color: colors.$soft-red;
+
+        > span { display: block }
+        > div > span {
+          display: block;
+        }
+      }
+
       &--input {
         width: 100%;
-        border: none;
-        outline: none;
-        background: none;
-        line-height: 100%;
-        padding: 1em 2.5em;
-        border-radius: $radius;
+        position: relative;
 
-        @media screen and (max-width: 800px) {
-          padding: 1em 1.5em;
+        > input {
+          width: 100%;
+          border: none;
+          outline: none;
+          background: none;
+          line-height: 100%;
+          padding: 1em 2.5em;
+          border-radius: $radius;
+
+          @media screen and (max-width: 800px) {
+            padding: 1em 1.5em;
+          }
+
+          &::placeholder {
+            color: colors.$desat-red;
+          }
         }
 
-        &::placeholder {
-          color: colors.$desat-red;
+        > span {
+          top: 50%;
+          right: 1.5em;
+          display: none;
+          position: absolute;
+          transform: translateY(-50%);
         }
       }
 
@@ -115,12 +138,31 @@ body {
         display: flex;
         padding: 1em 2.5em;
         align-items: center;
+        transform: scale(1.05);
         border-radius: $radius;
         background-image: colors.$grad-pr;
+        transition: transform 300ms ease-in-out;
         box-shadow: 0 .75em 1.5em colors.$desat-red-shadow;
+
+        &:hover {
+          transform: scale(1.1);
+        }
 
         @media screen and (max-width: 800px) {
           padding: 1em 1.75em;
+        }
+      }
+
+      &--error {
+        top: 120%;
+        left: 2.5em;
+        display: none;
+        font-size: .75em;
+        position: absolute;
+        color: colors.$soft-red;
+
+        @media screen and (max-width: 800px) {
+          left: 1.5em;
         }
       }
     }
@@ -142,7 +184,6 @@ body {
   }
 
   @media screen and (max-width: 800px) {
-
     &--dsk {
       display: none;
     }
