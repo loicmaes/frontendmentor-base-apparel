@@ -1,5 +1,156 @@
 @use "colors";
 
 body {
-  background-image: colors.$grad-wr;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  @media screen and (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+  }
 }
+
+.page {
+  gap: 8em;
+  display: flex;
+  padding: 4em 10em;
+  position: relative;
+  grid-column: 1 / span 3;
+  flex-direction: column;
+
+  @media screen and (max-width: 800px) {
+    gap: 0;
+    padding: 0;
+    grid-column: inherit;
+    background-image: colors.$grad-wr;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+    content: '';
+    opacity: .4;
+    width: 100%;
+    z-index: -1;
+    height: 100%;
+    position: absolute;
+    background-image: url('../imgs/bg-pattern-desktop.svg');
+
+    @media screen and (max-width: 800px) {
+      content: none;
+    }
+  }
+
+  &__logo {
+    @media screen and (max-width: 800px) {
+      margin: 2em;
+    }
+  }
+
+  &__content {
+    gap: 2.5em;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 800px) {
+      gap: 1.25em;
+      padding: 4em 2em;
+    }
+
+    &__title {
+      display: flex;
+      font-size: 3.5em;
+      letter-spacing: .3em;
+      flex-direction: column;
+      text-transform: uppercase;
+
+      @media screen and (max-width: 800px) {
+        font-size: 2.75em;
+        text-align: center;
+      }
+
+      &--highlight {
+        font-weight: 300;
+        color: colors.$desat-red;
+      }
+    }
+
+    &__description {
+      line-height: 175%;
+      color: colors.$desat-red;
+
+      @media screen and (max-width: 800px) {
+        text-align: center;
+      }
+    }
+
+    &__newsletter {
+      display: flex;
+      $radius: 100rem;
+      border-radius: $radius;
+      background-image: colors.$grad-wr;
+      border: 1px solid colors.$desat-red-shadow;
+
+      &--input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: none;
+        line-height: 100%;
+        padding: 1em 2.5em;
+        border-radius: $radius;
+
+        @media screen and (max-width: 800px) {
+          padding: 1em 1.5em;
+        }
+
+        &::placeholder {
+          color: colors.$desat-red;
+        }
+      }
+
+      &--button {
+        border: none;
+        outline: none;
+        display: flex;
+        padding: 1em 2.5em;
+        align-items: center;
+        border-radius: $radius;
+        background-image: colors.$grad-pr;
+        box-shadow: 0 .75em 1.5em colors.$desat-red-shadow;
+
+        @media screen and (max-width: 800px) {
+          padding: 1em 1.75em;
+        }
+      }
+    }
+  }
+}
+
+.image {
+  &--dsk, &--mobile {
+    object-fit: cover;
+    grid-column: span 2;
+  }
+
+  &--dsk {
+    display: block;
+  }
+
+  &--mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 800px) {
+
+    &--dsk {
+      display: none;
+    }
+
+    &--mobile {
+      display: block;
+    }
+  }
+}
+
+
